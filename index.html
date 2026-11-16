@@ -3,104 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fffaf4">
-<title>ちいさな計画カード</title>
+<meta name="theme-color" content="#fff5e8">
+<title>クエストカード工房</title>
 <style>
-:root{--ink:#514b49;--muted:#918781;--paper:#fffdf9;--line:#eadfd5;--pink:#f6dce0;--peach:#f8e5d4;--green:#e5eee3;--blue:#e4edf3;--accent:#bd7f83}
-*{box-sizing:border-box}body{margin:0;background:#faf6f0;color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
-header{padding:25px 20px 18px;text-align:center;background:#fffaf4;border-bottom:1px solid var(--line)}
-h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:500;letter-spacing:.12em;font-size:25px;margin:0 0 7px}
-header p{margin:0;color:var(--muted);font-size:12px;letter-spacing:.06em}
-main{max-width:1000px;margin:0 auto;padding:22px 16px 60px;display:grid;grid-template-columns:minmax(270px,340px) 1fr;gap:22px;align-items:start}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 20px #6d55400a}
-.panel h2{font-size:14px;font-weight:600;letter-spacing:.08em;margin:0 0 16px}
-label{display:block;font-size:12px;color:#786f69;margin:13px 0 6px}
-input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;color:var(--ink);font:inherit;font-size:14px;outline:none}
-input:focus,textarea:focus{border-color:#c99599;box-shadow:0 0 0 3px #f6dce077}
-textarea{resize:vertical;min-height:68px;line-height:1.6}
-.hint{font-size:11px;color:var(--muted);line-height:1.6;margin:6px 0 0}
-.icons{display:flex;gap:7px;flex-wrap:wrap}
-.icon{width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:20px;cursor:pointer}
-.icon.active{background:var(--pink);border-color:#cf9da2}
+:root{--ink:#493d54;--muted:#87798d;--line:#e8d9ee;--paper:#fffefa;--purple:#8060a8;--pink:#f8dce7;--yellow:#ffe9a9;--mint:#dff2df;--blue:#dcecff;--orange:#ffdfc2}
+*{box-sizing:border-box}
+body{margin:0;background:#fff8ef;color:var(--ink);font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif}
+header{text-align:center;padding:24px 16px 18px;background:linear-gradient(120deg,#fff0dc,#fce8f0 55%,#e9e7ff);border-bottom:2px dashed #e4cfe9}
+h1{margin:0;font-size:25px;letter-spacing:.08em;font-weight:800;color:#674b83}
+header p{margin:7px 0 0;font-size:12px;color:#87718e}
+main{max-width:1050px;margin:auto;padding:18px 14px 50px;display:grid;grid-template-columns:minmax(270px,350px) 1fr;gap:18px;align-items:start}
+.panel{background:#fff;border:2px solid #f0e3f1;border-radius:20px;padding:17px;box-shadow:0 5px 0 #eaddec}
+.panel h2{font-size:14px;margin:0 0 14px;color:#76568e;letter-spacing:.06em}
+label{display:block;font-size:12px;font-weight:700;margin:12px 0 6px;color:#6e5b7b}
+input,textarea{width:100%;border:1.5px solid #e6d9ed;border-radius:11px;background:#fffdfd;padding:10px 11px;color:var(--ink);font:inherit;font-size:14px;outline:none}
+input:focus,textarea:focus{border-color:#ad8bc7;box-shadow:0 0 0 3px #e9ddf5}
+textarea{resize:vertical;min-height:67px;line-height:1.55}
+.icons{display:flex;gap:6px;flex-wrap:wrap}
+.icon{width:36px;height:36px;border:1.5px solid #e7d9ec;border-radius:11px;background:#fff;font-size:19px}
+.icon.active{background:#f4e5ff;border-color:#a783c4;box-shadow:0 0 0 2px #f4e5ff}
+.hint,.small{font-size:11px;color:var(--muted);line-height:1.6}
+.hint{margin:5px 0 0}
+.uploadbox{border:1.5px dashed #cdb8dc;background:#fcf8ff;padding:11px;border-radius:12px}
+.uploadbox input{border:0;background:transparent;padding:4px 0;font-size:12px}
+.uploadrow{display:flex;align-items:center;gap:9px}
+.uploadthumb{width:48px;height:48px;object-fit:cover;border-radius:10px;background:#f4e9f8;display:none}
 button{font:inherit;cursor:pointer;border:0}
-.primary{background:#b97f84;color:white;border-radius:11px;padding:12px 16px;font-size:13px}
-.secondary{background:#f4ece5;color:#665b54;border-radius:11px;padding:10px 13px;font-size:12px}
-.danger{background:#fff0ef;color:#a45f60;border-radius:10px;padding:8px 10px;font-size:11px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.primary{background:linear-gradient(120deg,#8866b0,#aa79a8);color:white;border-radius:12px;padding:12px 16px;font-size:13px;font-weight:700;box-shadow:0 3px 0 #6d4e8d}
+.secondary{background:#f2eaf8;color:#684e7d;border-radius:11px;padding:10px 13px;font-size:12px;font-weight:700}
+.danger{background:#fff0f1;color:#a75b70;border-radius:10px;padding:8px 10px;font-size:11px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
 .preview-head h2{margin:0}
-.preview-note{font-size:11px;color:var(--muted)}
-.card-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.card{aspect-ratio:120/70;min-width:0;border-radius:13px;position:relative;overflow:hidden;padding:13px 14px;background:#fff;border:1px solid #e9dcd2;box-shadow:0 4px 12px #624d3b0b}
-.front{background:linear-gradient(135deg,#fffdf9 0%,#fff8f2 100%)}
-.front:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:#f8e6e3;right:-28px;top:-38px}
-.front:after{content:"";position:absolute;width:55px;height:55px;border-radius:50%;background:#e9eee3;right:40px;bottom:-34px}
-.back{background:linear-gradient(145deg,#fffdf9,#f8faf5)}
-.kicker{font-size:8px;letter-spacing:.18em;color:#b17d80;position:relative;z-index:1}
-.card-title{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(13px,2vw,20px);line-height:1.35;font-weight:600;margin:8px 0 9px;position:relative;z-index:1;overflow-wrap:anywhere}
-.illustration{position:absolute;right:14px;top:23px;font-size:clamp(27px,4vw,42px);z-index:1;filter:drop-shadow(0 3px 2px #80665b18)}
-.meta{position:absolute;left:14px;right:14px;bottom:12px;display:flex;gap:7px;z-index:1}
-.meta span{background:#fff9;border:1px solid #eadfd5;border-radius:20px;padding:4px 8px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%}
-.back-title{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:13px;margin:6px 0 8px;position:relative;z-index:1}
-.step-text{font-size:clamp(10px,1.3vw,13px);line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;z-index:1}
-.back-mark{position:absolute;right:12px;bottom:7px;font-size:22px;color:#c5d4c2}
-.list{margin-top:16px}
-.list-row{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-bottom:1px solid #f0e8e1;font-size:12px;gap:8px}
-.list-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.empty{color:var(--muted);font-size:12px;padding:18px 4px;text-align:center}
-.small{font-size:10px;color:var(--muted);line-height:1.6;margin-top:12px}
-@media(max-width:720px){main{grid-template-columns:1fr;padding:15px 12px 40px}.preview{order:2}.editor{order:1}.card{padding:10px}.card-title{font-size:15px}.meta{left:10px;right:10px;bottom:9px}.meta span{font-size:8px}.illustration{right:10px;top:20px}.back-title{font-size:11px}.step-text{font-size:10px}}
-@page{size:A4 landscape;margin:8mm}
+.preview-note{font-size:11px;color:var(--muted);margin-top:4px}
+#printArea{display:flex;flex-direction:column;align-items:center;gap:15px}
+.card-pair{display:flex;gap:8px;justify-content:center}
+.card{width: min( calc((100vw - 90px)/2), 210px);aspect-ratio:7/12;flex:none;position:relative;overflow:hidden;border:2px solid #e6d6ef;border-radius:16px;padding:12px;background:#fffdf8;box-shadow:0 5px 0 #e8dced}
+.front{background:linear-gradient(155deg,#fffdf7 0%,#fff1db 55%,#fce7ef 100%)}
+.front:before{content:"";position:absolute;width:100px;height:100px;border-radius:50%;background:#ffe5a8;right:-35px;top:-35px}
+.front:after{content:"";position:absolute;width:70px;height:70px;border-radius:50%;background:#dff2df;left:-32px;bottom:28px}
+.back{background:linear-gradient(145deg,#f4f0ff,#fff9e9 65%,#e9f8f0)}
+.badge{display:inline-block;position:relative;z-index:1;background:#76558f;color:white;border-radius:20px;padding:4px 8px;font-size:9px;font-weight:800;letter-spacing:.08em}
+.card-title{position:relative;z-index:1;font-size:clamp(14px,2.4vw,19px);font-weight:900;line-height:1.35;margin:9px 0 8px;overflow-wrap:anywhere}
+.art{position:relative;z-index:1;width:100%;height:34%;min-height:60px;max-height:130px;border-radius:13px;background:#ffffffb8;border:1.5px dashed #dfcde8;display:flex;align-items:center;justify-content:center;overflow:hidden;margin:8px 0}
+.art img{width:100%;height:100%;object-fit:contain}
+.art .emoji{font-size:clamp(34px,6vw,58px);filter:drop-shadow(0 3px 1px #76558f20)}
+.info{position:relative;z-index:2;margin-top:9px;display:grid;gap:7px}
+.info-row{background:#fffefa;border:1.5px solid #eddfd2;border-radius:10px;padding:7px 8px;min-width:0}
+.info-label{display:block;font-size:9px;font-weight:900;color:#946b91;margin-bottom:3px}
+.info-value{display:block;font-size:clamp(10px,1.55vw,13px);font-weight:700;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word}
+.quest-title{font-size:17px;font-weight:900;margin:12px 0 12px;position:relative;z-index:1;line-height:1.3}
+.quest-title:after{content:"";display:block;width:42px;height:4px;border-radius:4px;background:#f2c85f;margin-top:7px}
+.quest-text{position:relative;z-index:1;background:#fffefa;border:1.5px solid #e5d9ee;border-radius:13px;padding:11px;font-size:clamp(12px,1.8vw,15px);font-weight:700;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;min-height:80px}
+.quest-foot{position:absolute;bottom:10px;right:12px;font-size:20px;color:#9c80b7}
+.saved{margin-top:18px}
+.saved-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 2px;border-bottom:1px solid #f0e7f2;font-size:12px}
+.saved-row>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.saved-row div{flex:none}
+.empty{color:var(--muted);font-size:12px;text-align:center;padding:18px 4px}
+@media(min-width:720px){.card{width:210px}}
+@media(max-width:720px){main{grid-template-columns:1fr;padding:14px 11px 40px}.card{width:calc((100vw - 48px)/2);padding:9px;border-radius:13px}.card-title{font-size:15px}.art{height:32%;min-height:52px;margin:6px 0}.info{gap:5px;margin-top:6px}.info-row{padding:6px}.info-label{font-size:8px}.info-value{font-size:11px}.quest-title{font-size:15px;margin:10px 0}.quest-text{font-size:12px;padding:9px}.badge{font-size:8px}}
+@page{size:A4 portrait;margin:8mm}
 @media print{
- body{background:white}.no-print,header,.editor,.preview-head,.list{display:none!important}
- main{display:block;max-width:none;margin:0;padding:0}.preview{border:0;padding:0;box-shadow:none}
- #printArea{display:grid;grid-template-columns:1fr;gap:5mm}
- .card-pair{display:grid;grid-template-columns:120mm 120mm;gap:0;margin:0;break-inside:avoid;page-break-inside:avoid}
- .card{width:120mm;height:70mm;aspect-ratio:auto;border-radius:2mm;box-shadow:none;padding:5mm 5.5mm}
- .front:before{width:42mm;height:42mm;right:-10mm;top:-14mm}.front:after{width:22mm;height:22mm;right:14mm;bottom:-13mm}
- .kicker{font-size:7pt}.card-title{font-size:17pt;margin:3mm 0}
- .illustration{font-size:31pt;right:5mm;top:8mm}.meta{left:5.5mm;right:5.5mm;bottom:4mm;gap:2mm}
- .meta span{font-size:8pt;padding:1.2mm 2.5mm}.back-title{font-size:12pt;margin:2mm 0 3mm}
- .step-text{font-size:10pt;line-height:1.55}.back-mark{font-size:20pt}
+ body{background:white}header,.no-print,.editor{display:none!important}
+ main{display:block;margin:0;padding:0;max-width:none}.preview{border:0;padding:0;box-shadow:none}
+ #printArea{display:grid;grid-template-columns:1fr;gap:7mm}
+ .card-pair{display:flex;gap:0;justify-content:center;break-inside:avoid;page-break-inside:avoid}
+ .card{width:70mm;height:120mm;aspect-ratio:auto;border-radius:3mm;padding:4mm;box-shadow:none;border-width:.4mm}
+ .front:before{width:35mm;height:35mm;right:-12mm;top:-12mm}.front:after{width:25mm;height:25mm;left:-12mm;bottom:25mm}
+ .badge{font-size:7pt;padding:1.5mm 2.5mm}.card-title{font-size:15pt;margin:3mm 0 2mm}
+ .art{height:37%;min-height:0;max-height:none;margin:2mm 0;border-radius:2mm}
+ .art .emoji{font-size:36pt}.info{gap:2mm;margin-top:2mm}
+ .info-row{padding:2mm 2.2mm;border-radius:2mm}.info-label{font-size:7pt;margin-bottom:.7mm}
+ .info-value{font-size:9.5pt;line-height:1.35}
+ .quest-title{font-size:14pt;margin:4mm 0}.quest-title:after{height:1mm;width:12mm;margin-top:2mm}
+ .quest-text{font-size:11pt;line-height:1.55;padding:3mm;min-height:0;border-radius:2mm}
+ .quest-foot{font-size:16pt;bottom:3mm;right:4mm}
 }
 </style>
 </head>
 <body>
-<header><h1>ちいさな計画カード</h1><p>やってみたいことを、ひとつのカードに。</p></header>
+<header><h1>⭐ クエストカード工房 ⭐</h1><p>「やってみたい！」を、小さなクエストにしよう。</p></header>
 <main>
 <section class="panel editor no-print">
-<h2>カードをつくる</h2>
-<label for="title">タイトル</label><input id="title" maxlength="32" placeholder="例：季節の花を撮ってみる">
-<label>イラスト</label><div class="icons" id="icons">
-<button class="icon active" data-icon="🌷" aria-label="チューリップ">🌷</button><button class="icon" data-icon="📚" aria-label="本">📚</button><button class="icon" data-icon="🎨" aria-label="絵の具">🎨</button><button class="icon" data-icon="🌿" aria-label="葉っぱ">🌿</button><button class="icon" data-icon="☕" aria-label="カップ">☕</button><button class="icon" data-icon="📷" aria-label="カメラ">📷</button><button class="icon" data-icon="🧵" aria-label="糸">🧵</button><button class="icon" data-icon="⭐" aria-label="星">⭐</button><button class="icon" data-icon="🎵" aria-label="音楽">🎵</button><button class="icon" data-icon="🪴" aria-label="植物">🪴</button><button class="icon" data-icon="🍪" aria-label="お菓子">🍪</button><button class="icon" data-icon="🚲" aria-label="自転車">🚲</button>
+<h2>🎒 カードをつくる</h2>
+<label for="title">クエスト名・タイトル</label><input id="title" maxlength="42" placeholder="例：自分だけの小さな本を作る">
+<label>カードのイラスト</label>
+<div class="uploadbox"><div class="uploadrow"><img id="uploadThumb" class="uploadthumb" alt=""><div style="flex:1"><input id="artUpload" type="file" accept="image/*"><div class="hint">スマホの写真・イラストを選べます。選ばない場合は下のアイコンを使います。</div></div></div><button class="secondary" id="removeArt" type="button" style="margin-top:7px">画像をはずす</button></div>
+<div class="icons" id="icons" style="margin-top:9px">
+<button class="icon active" data-icon="🗺️">🗺️</button><button class="icon" data-icon="📚">📚</button><button class="icon" data-icon="🎨">🎨</button><button class="icon" data-icon="🌿">🌿</button><button class="icon" data-icon="🧪">🧪</button><button class="icon" data-icon="📷">📷</button><button class="icon" data-icon="🧵">🧵</button><button class="icon" data-icon="⭐">⭐</button><button class="icon" data-icon="🎵">🎵</button><button class="icon" data-icon="🪴">🪴</button><button class="icon" data-icon="🍪">🍪</button><button class="icon" data-icon="🚲">🚲</button>
 </div>
-<label for="cost">費用</label><input id="cost" maxlength="40" placeholder="例：無料 / 材料費 500円くらい">
-<label for="needs">必要なもの</label><textarea id="needs" maxlength="180" placeholder="例：カメラ、歩きやすい靴"></textarea>
-<label for="firstStep">計画の一歩目</label><textarea id="firstStep" maxlength="180" placeholder="例：近くで花が見られる公園を調べてみよう"></textarea>
-<p class="hint">「まず何を調べる？」「誰に聞いてみる？」など、最初にできる小さな一歩を書きます。</p>
+<label for="cost">💰 費用</label><input id="cost" maxlength="90" placeholder="例：500円くらい / まずは無料で！">
+<label for="needs">🧰 必要なもの</label><textarea id="needs" maxlength="240" placeholder="例：ノート、色鉛筆、はさみ"></textarea>
+<label for="firstStep">🚩 計画の一歩目</label><textarea id="firstStep" maxlength="240" placeholder="例：まずは作りたい本の大きさを調べてみよう！"></textarea>
+<p class="hint">「まず何を調べる？」「誰に聞いてみる？」など、最初にできる小さな一歩を書こう。</p>
 <div class="actions"><button class="primary" id="saveBtn">カードを保存</button><button class="secondary" id="clearBtn">入力をクリア</button></div>
-<p class="small">カードはこの端末のブラウザに保存されます。ブラウザのデータを消すとカードも消えるため、大切なカードは印刷・PDF保存してください。</p>
+<p class="small">カードはこの端末のブラウザに保存されます。大切なカードはPDFでも保存してください。</p>
 </section>
 <section class="panel preview">
-<div class="preview-head no-print"><div><h2>カードのプレビュー</h2><div class="preview-note">表面・裏面／各 120 × 70 mm</div></div><button class="primary" id="printBtn">印刷・PDF保存</button></div>
+<div class="preview-head no-print"><div><h2>✨ カードのプレビュー</h2><div class="preview-note">表面・裏面／各 70 × 120 mm</div></div><button class="primary" id="printBtn">PDF・印刷</button></div>
 <div id="printArea"></div>
-<div class="list no-print"><h2>保存したカード</h2><div id="savedList"></div></div>
-<p class="small no-print">A4横向きに、表面と裏面を横並びで配置します。PDFとして保存する場合は、印刷画面で「PDFに保存」を選んでください。</p>
+<div class="saved no-print"><h2>📦 保存したカード</h2><div id="savedList"></div></div>
+<p class="small no-print">A4用紙に、縦型カードの表面・裏面を横並びで配置します。PDF保存は印刷画面で「PDFに保存」を選んでください。</p>
 </section>
 </main>
 <script>
-const $=id=>document.getElementById(id);
-const fields=['title','cost','needs','firstStep'];
-let selectedIcon='🌷',cards=[],editingId=null;
+const $=id=>document.getElementById(id),fields=['title','cost','needs','firstStep'];
+let selectedIcon='🗺️',artData='',cards=[],editingId=null;
 try{cards=JSON.parse(localStorage.getItem('tinyPlanCards')||'[]')}catch(e){cards=[]}
 function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function readForm(){return {id:editingId||String(Date.now()),title:$('title').value.trim(),icon:selectedIcon,cost:$('cost').value.trim(),needs:$('needs').value.trim(),firstStep:$('firstStep').value.trim()}}
-function form(c){fields.forEach(k=>$(k).value=c?.[k]||'');selectedIcon=c?.icon||'🌷';document.querySelectorAll('.icon').forEach(b=>b.classList.toggle('active',b.dataset.icon===selectedIcon));}
-function renderPreview(c){const title=esc(c.title||'活動のタイトル');const icon=esc(c.icon||'🌷');return `<div class="card-pair"><article class="card front"><div class="kicker">MY LITTLE PLAN</div><div class="card-title">${title}</div><div class="illustration">${icon}</div><div class="meta"><span>費用　${esc(c.cost||'—')}</span><span>必要なもの　${esc(c.needs||'—')}</span></div></article><article class="card back"><div class="kicker">THE FIRST STEP</div><div class="back-title">計画の一歩目</div><div class="step-text">${esc(c.firstStep||'最初の一歩を書いてみよう。')}</div><div class="back-mark">✳</div></article></div>`}
-function previewDraft(){const c=readForm();$('printArea').innerHTML=renderPreview(c)}
-function persist(){localStorage.setItem('tinyPlanCards',JSON.stringify(cards))}
-function render(){ $('savedList').innerHTML=cards.length?cards.map(c=>`<div class="list-row"><span>${esc(c.title||'タイトル未入力')}</span><div><button class="secondary" data-edit="${esc(c.id)}">編集</button> <button class="danger" data-delete="${esc(c.id)}">削除</button></div></div>`).join(''):'<div class="empty">保存したカードはまだありません。</div>'; }
-$('icons').addEventListener('click',e=>{const b=e.target.closest('button[data-icon]');if(!b)return;selectedIcon=b.dataset.icon;document.querySelectorAll('.icon').forEach(x=>x.classList.toggle('active',x===b));previewDraft()});
+function readForm(){return{id:editingId||String(Date.now()),title:$('title').value.trim(),icon:selectedIcon,art:artData,cost:$('cost').value.trim(),needs:$('needs').value.trim(),firstStep:$('firstStep').value.trim()}}
+function form(c){fields.forEach(k=>$(k).value=c?.[k]||'');selectedIcon=c?.icon||'🗺️';artData=c?.art||'';document.querySelectorAll('.icon').forEach(b=>b.classList.toggle('active',b.dataset.icon===selectedIcon));showThumb();$('artUpload').value=''}
+function showThumb(){const im=$('uploadThumb');im.src=artData||'';im.style.display=artData?'block':'none'}
+function renderPreview(c){const title=esc(c.title||'クエストのタイトル'),art=c.art?`<img src="${c.art}" alt="">`:`<span class="emoji">${esc(c.icon||'🗺️')}</span>`;return `<div class="card-pair"><article class="card front"><div class="badge">★ MY QUEST ★</div><div class="card-title">${title}</div><div class="art">${art}</div><div class="info"><div class="info-row"><span class="info-label">💰 COST｜費用</span><span class="info-value">${esc(c.cost||'これから決めよう！')}</span></div><div class="info-row"><span class="info-label">🎒 ITEMS｜必要なもの</span><span class="info-value">${esc(c.needs||'持ちものを書こう')}</span></div></div></article><article class="card back"><div class="badge">🚩 NEXT MISSION</div><div class="quest-title">計画の一歩目</div><div class="quest-text">${esc(c.firstStep||'最初の一歩を考えてみよう！')}</div><div class="quest-foot">✦ ✧</div></article></div>`}
+function previewDraft(){$('printArea').innerHTML=renderPreview(readForm())}
+function persist(){try{localStorage.setItem('tinyPlanCards',JSON.stringify(cards))}catch(e){alert('保存容量がいっぱいです。画像サイズを小さくするか、不要なカードを削除してください。')}}
+function render(){ $('savedList').innerHTML=cards.length?cards.map(c=>`<div class="saved-row"><span>${esc(c.title||'タイトル未入力')}</span><div><button class="secondary" data-edit="${esc(c.id)}">編集</button> <button class="danger" data-delete="${esc(c.id)}">削除</button></div></div>`).join(''):'<div class="empty">保存したカードはまだありません。</div>'}
+$('icons').addEventListener('click',e=>{const b=e.target.closest('button[data-icon]');if(!b)return;selectedIcon=b.dataset.icon;artData='';showThumb();$('artUpload').value='';document.querySelectorAll('.icon').forEach(x=>x.classList.toggle('active',x===b));previewDraft()});
+$('artUpload').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){alert('画像ファイルを選んでください。');return}const reader=new FileReader();reader.onload=()=>{const img=new Image();img.onload=()=>{const max=800,scale=Math.min(1,max/Math.max(img.width,img.height)),canvas=document.createElement('canvas');canvas.width=Math.round(img.width*scale);canvas.height=Math.round(img.height*scale);canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);artData=canvas.toDataURL('image/jpeg',.82);showThumb();previewDraft()};img.src=reader.result};reader.readAsDataURL(file)});
+$('removeArt').addEventListener('click',()=>{artData='';$('artUpload').value='';showThumb();previewDraft()});
 fields.forEach(k=>$(k).addEventListener('input',previewDraft));
 $('saveBtn').addEventListener('click',()=>{const c=readForm();if(!c.title){$('title').focus();alert('タイトルを入力してください。');return}const i=cards.findIndex(x=>x.id===c.id);if(i>=0)cards[i]=c;else cards.unshift(c);persist();editingId=null;$('saveBtn').textContent='カードを保存';render();previewDraft()});
 $('clearBtn').addEventListener('click',()=>{editingId=null;form(null);$('saveBtn').textContent='カードを保存';previewDraft()});
