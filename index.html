@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fffaf4">
+<title>ちいさな計画カード</title>
+<style>
+:root{--ink:#514b49;--muted:#918781;--paper:#fffdf9;--line:#eadfd5;--pink:#f6dce0;--peach:#f8e5d4;--green:#e5eee3;--blue:#e4edf3;--accent:#bd7f83}
+*{box-sizing:border-box}body{margin:0;background:#faf6f0;color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+header{padding:25px 20px 18px;text-align:center;background:#fffaf4;border-bottom:1px solid var(--line)}
+h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-weight:500;letter-spacing:.12em;font-size:25px;margin:0 0 7px}
+header p{margin:0;color:var(--muted);font-size:12px;letter-spacing:.06em}
+main{max-width:1000px;margin:0 auto;padding:22px 16px 60px;display:grid;grid-template-columns:minmax(270px,340px) 1fr;gap:22px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 20px #6d55400a}
+.panel h2{font-size:14px;font-weight:600;letter-spacing:.08em;margin:0 0 16px}
+label{display:block;font-size:12px;color:#786f69;margin:13px 0 6px}
+input,textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;color:var(--ink);font:inherit;font-size:14px;outline:none}
+input:focus,textarea:focus{border-color:#c99599;box-shadow:0 0 0 3px #f6dce077}
+textarea{resize:vertical;min-height:68px;line-height:1.6}
+.hint{font-size:11px;color:var(--muted);line-height:1.6;margin:6px 0 0}
+.icons{display:flex;gap:7px;flex-wrap:wrap}
+.icon{width:38px;height:38px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:20px;cursor:pointer}
+.icon.active{background:var(--pink);border-color:#cf9da2}
+button{font:inherit;cursor:pointer;border:0}
+.primary{background:#b97f84;color:white;border-radius:11px;padding:12px 16px;font-size:13px}
+.secondary{background:#f4ece5;color:#665b54;border-radius:11px;padding:10px 13px;font-size:12px}
+.danger{background:#fff0ef;color:#a45f60;border-radius:10px;padding:8px 10px;font-size:11px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.preview-head h2{margin:0}
+.preview-note{font-size:11px;color:var(--muted)}
+.card-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.card{aspect-ratio:120/70;min-width:0;border-radius:13px;position:relative;overflow:hidden;padding:13px 14px;background:#fff;border:1px solid #e9dcd2;box-shadow:0 4px 12px #624d3b0b}
+.front{background:linear-gradient(135deg,#fffdf9 0%,#fff8f2 100%)}
+.front:before{content:"";position:absolute;width:110px;height:110px;border-radius:50%;background:#f8e6e3;right:-28px;top:-38px}
+.front:after{content:"";position:absolute;width:55px;height:55px;border-radius:50%;background:#e9eee3;right:40px;bottom:-34px}
+.back{background:linear-gradient(145deg,#fffdf9,#f8faf5)}
+.kicker{font-size:8px;letter-spacing:.18em;color:#b17d80;position:relative;z-index:1}
+.card-title{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(13px,2vw,20px);line-height:1.35;font-weight:600;margin:8px 0 9px;position:relative;z-index:1;overflow-wrap:anywhere}
+.illustration{position:absolute;right:14px;top:23px;font-size:clamp(27px,4vw,42px);z-index:1;filter:drop-shadow(0 3px 2px #80665b18)}
+.meta{position:absolute;left:14px;right:14px;bottom:12px;display:flex;gap:7px;z-index:1}
+.meta span{background:#fff9;border:1px solid #eadfd5;border-radius:20px;padding:4px 8px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:50%}
+.back-title{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:13px;margin:6px 0 8px;position:relative;z-index:1}
+.step-text{font-size:clamp(10px,1.3vw,13px);line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;position:relative;z-index:1}
+.back-mark{position:absolute;right:12px;bottom:7px;font-size:22px;color:#c5d4c2}
+.list{margin-top:16px}
+.list-row{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-bottom:1px solid #f0e8e1;font-size:12px;gap:8px}
+.list-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.empty{color:var(--muted);font-size:12px;padding:18px 4px;text-align:center}
+.small{font-size:10px;color:var(--muted);line-height:1.6;margin-top:12px}
+@media(max-width:720px){main{grid-template-columns:1fr;padding:15px 12px 40px}.preview{order:2}.editor{order:1}.card{padding:10px}.card-title{font-size:15px}.meta{left:10px;right:10px;bottom:9px}.meta span{font-size:8px}.illustration{right:10px;top:20px}.back-title{font-size:11px}.step-text{font-size:10px}}
+@page{size:A4 landscape;margin:8mm}
+@media print{
+ body{background:white}.no-print,header,.editor,.preview-head,.list{display:none!important}
+ main{display:block;max-width:none;margin:0;padding:0}.preview{border:0;padding:0;box-shadow:none}
+ #printArea{display:grid;grid-template-columns:1fr;gap:5mm}
+ .card-pair{display:grid;grid-template-columns:120mm 120mm;gap:0;margin:0;break-inside:avoid;page-break-inside:avoid}
+ .card{width:120mm;height:70mm;aspect-ratio:auto;border-radius:2mm;box-shadow:none;padding:5mm 5.5mm}
+ .front:before{width:42mm;height:42mm;right:-10mm;top:-14mm}.front:after{width:22mm;height:22mm;right:14mm;bottom:-13mm}
+ .kicker{font-size:7pt}.card-title{font-size:17pt;margin:3mm 0}
+ .illustration{font-size:31pt;right:5mm;top:8mm}.meta{left:5.5mm;right:5.5mm;bottom:4mm;gap:2mm}
+ .meta span{font-size:8pt;padding:1.2mm 2.5mm}.back-title{font-size:12pt;margin:2mm 0 3mm}
+ .step-text{font-size:10pt;line-height:1.55}.back-mark{font-size:20pt}
+}
+</style>
+</head>
+<body>
+<header><h1>ちいさな計画カード</h1><p>やってみたいことを、ひとつのカードに。</p></header>
+<main>
+<section class="panel editor no-print">
+<h2>カードをつくる</h2>
+<label for="title">タイトル</label><input id="title" maxlength="32" placeholder="例：季節の花を撮ってみる">
+<label>イラスト</label><div class="icons" id="icons">
+<button class="icon active" data-icon="🌷" aria-label="チューリップ">🌷</button><button class="icon" data-icon="📚" aria-label="本">📚</button><button class="icon" data-icon="🎨" aria-label="絵の具">🎨</button><button class="icon" data-icon="🌿" aria-label="葉っぱ">🌿</button><button class="icon" data-icon="☕" aria-label="カップ">☕</button><button class="icon" data-icon="📷" aria-label="カメラ">📷</button><button class="icon" data-icon="🧵" aria-label="糸">🧵</button><button class="icon" data-icon="⭐" aria-label="星">⭐</button><button class="icon" data-icon="🎵" aria-label="音楽">🎵</button><button class="icon" data-icon="🪴" aria-label="植物">🪴</button><button class="icon" data-icon="🍪" aria-label="お菓子">🍪</button><button class="icon" data-icon="🚲" aria-label="自転車">🚲</button>
+</div>
+<label for="cost">費用</label><input id="cost" maxlength="40" placeholder="例：無料 / 材料費 500円くらい">
+<label for="needs">必要なもの</label><textarea id="needs" maxlength="180" placeholder="例：カメラ、歩きやすい靴"></textarea>
+<label for="firstStep">計画の一歩目</label><textarea id="firstStep" maxlength="180" placeholder="例：近くで花が見られる公園を調べてみよう"></textarea>
+<p class="hint">「まず何を調べる？」「誰に聞いてみる？」など、最初にできる小さな一歩を書きます。</p>
+<div class="actions"><button class="primary" id="saveBtn">カードを保存</button><button class="secondary" id="clearBtn">入力をクリア</button></div>
+<p class="small">カードはこの端末のブラウザに保存されます。ブラウザのデータを消すとカードも消えるため、大切なカードは印刷・PDF保存してください。</p>
+</section>
+<section class="panel preview">
+<div class="preview-head no-print"><div><h2>カードのプレビュー</h2><div class="preview-note">表面・裏面／各 120 × 70 mm</div></div><button class="primary" id="printBtn">印刷・PDF保存</button></div>
+<div id="printArea"></div>
+<div class="list no-print"><h2>保存したカード</h2><div id="savedList"></div></div>
+<p class="small no-print">A4横向きに、表面と裏面を横並びで配置します。PDFとして保存する場合は、印刷画面で「PDFに保存」を選んでください。</p>
+</section>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const fields=['title','cost','needs','firstStep'];
+let selectedIcon='🌷',cards=[],editingId=null;
+try{cards=JSON.parse(localStorage.getItem('tinyPlanCards')||'[]')}catch(e){cards=[]}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function readForm(){return {id:editingId||String(Date.now()),title:$('title').value.trim(),icon:selectedIcon,cost:$('cost').value.trim(),needs:$('needs').value.trim(),firstStep:$('firstStep').value.trim()}}
+function form(c){fields.forEach(k=>$(k).value=c?.[k]||'');selectedIcon=c?.icon||'🌷';document.querySelectorAll('.icon').forEach(b=>b.classList.toggle('active',b.dataset.icon===selectedIcon));}
+function renderPreview(c){const title=esc(c.title||'活動のタイトル');const icon=esc(c.icon||'🌷');return `<div class="card-pair"><article class="card front"><div class="kicker">MY LITTLE PLAN</div><div class="card-title">${title}</div><div class="illustration">${icon}</div><div class="meta"><span>費用　${esc(c.cost||'—')}</span><span>必要なもの　${esc(c.needs||'—')}</span></div></article><article class="card back"><div class="kicker">THE FIRST STEP</div><div class="back-title">計画の一歩目</div><div class="step-text">${esc(c.firstStep||'最初の一歩を書いてみよう。')}</div><div class="back-mark">✳</div></article></div>`}
+function previewDraft(){const c=readForm();$('printArea').innerHTML=renderPreview(c)}
+function persist(){localStorage.setItem('tinyPlanCards',JSON.stringify(cards))}
+function render(){ $('savedList').innerHTML=cards.length?cards.map(c=>`<div class="list-row"><span>${esc(c.title||'タイトル未入力')}</span><div><button class="secondary" data-edit="${esc(c.id)}">編集</button> <button class="danger" data-delete="${esc(c.id)}">削除</button></div></div>`).join(''):'<div class="empty">保存したカードはまだありません。</div>'; }
+$('icons').addEventListener('click',e=>{const b=e.target.closest('button[data-icon]');if(!b)return;selectedIcon=b.dataset.icon;document.querySelectorAll('.icon').forEach(x=>x.classList.toggle('active',x===b));previewDraft()});
+fields.forEach(k=>$(k).addEventListener('input',previewDraft));
+$('saveBtn').addEventListener('click',()=>{const c=readForm();if(!c.title){$('title').focus();alert('タイトルを入力してください。');return}const i=cards.findIndex(x=>x.id===c.id);if(i>=0)cards[i]=c;else cards.unshift(c);persist();editingId=null;$('saveBtn').textContent='カードを保存';render();previewDraft()});
+$('clearBtn').addEventListener('click',()=>{editingId=null;form(null);$('saveBtn').textContent='カードを保存';previewDraft()});
+$('savedList').addEventListener('click',e=>{const ed=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(ed){const c=cards.find(x=>x.id===ed.dataset.edit);if(c){editingId=c.id;form(c);$('saveBtn').textContent='変更を保存';previewDraft();window.scrollTo({top:0,behavior:'smooth'})}}if(del&&confirm('このカードを削除しますか？')){cards=cards.filter(x=>x.id!==del.dataset.delete);persist();render()}});
+$('printBtn').addEventListener('click',()=>{if(!cards.length){alert('先にカードを保存してください。');return}$('printArea').innerHTML=cards.map(renderPreview).join('');window.print()});
+window.addEventListener('afterprint',previewDraft);
+render();previewDraft();
+</script>
+</body></html>
