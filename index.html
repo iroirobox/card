@@ -95,6 +95,54 @@ button{font:inherit;cursor:pointer;border:0}
  .quest-text{font-size:10.5pt;line-height:1.55;padding:3mm;min-height:0;border-radius:1mm}
  .quest-foot{bottom:3mm;font-size:7pt}
 }
+
+/* --- Quest card redesign: bright, collectible fantasy-RPG style --- */
+:root{--ink:#553d39;--plum:#554a83;--wine:#8b5b91;--gold:#e7ae50;--paper:#fff5d9;--line:#e9c58a;--soft:#fff0d0;--green:#5f9877}
+body{background:#f7f4ee}
+header{background:linear-gradient(110deg,#e5f8ff 0%,#f4edff 55%,#fff2df 100%);border-bottom:1px solid #e5dced}
+header .eyebrow{color:#6888a7}h1{color:#514a7c}
+.panel{border-color:#e7dfeb;box-shadow:0 6px 22px #5c4d7610}
+.panel h2{color:#62558d}
+.primary{background:#65558e;box-shadow:0 3px 0 #493d70}
+.secondary{background:#f0eaff;color:#5e5084}
+input:focus,textarea:focus{border-color:#9b8bd0;box-shadow:0 0 0 3px #eeeaff}
+.crop-preview{border-color:#9b8bd0}
+.icon.active{background:#f0eaff;border-color:#8876bd}
+# 【quest-card-theme】
+.card{border:1.2px solid #c5d7df;border-radius:3.5mm;padding:3.2mm;box-shadow:0 2px 0 #dce5e9;background:#fff5d9}
+.card:before{inset:2mm;border:1px solid #fff4d5;border-radius:2mm;z-index:3}
+.front{background:linear-gradient(180deg,#69c9ec 0%,#b9ecf7 35%,#d8f0d4 68%,#8fc18c 100%);border-color:#69b9d2}
+.back{background:linear-gradient(180deg,#9991d4 0%,#c3b5e9 48%,#e7c8dc 72%,#7f9ac0 100%);border-color:#a99bd7}
+.front:after,.back:after{content:"";position:absolute;left:0;right:0;bottom:0;height:29%;z-index:0;pointer-events:none}
+.front:after{background:radial-gradient(ellipse at 15% 100%,#5c9d70 0 23%,transparent 24%),radial-gradient(ellipse at 75% 100%,#75b477 0 30%,transparent 31%),linear-gradient(165deg,transparent 0 28%,#a7d48b 29% 52%,#70ae7a 53%)}
+.back:after{background:radial-gradient(ellipse at 20% 100%,#607eaa 0 28%,transparent 29%),radial-gradient(ellipse at 82% 100%,#647eaa 0 30%,transparent 31%),linear-gradient(170deg,transparent 0 25%,#8c9cc6 26% 48%,#657ca9 49%)}
+.card-top{display:table;margin:1mm auto 2.2mm;padding:1.3mm 4mm;border-radius:8mm;background:#344d7b;color:#fff8d9;font-size:6.5pt;letter-spacing:.15em;box-shadow:0 1mm 0 #263c63;z-index:4}
+.back .card-top{background:#66517f;box-shadow:0 1mm 0 #4b3b66}
+.card-title{margin:0 1mm 2mm;padding:2.4mm 2mm;background:#fff0c8;border:1px solid #e5b967;border-radius:3mm;color:#624235;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:14pt;line-height:1.25;box-shadow:0 1mm 0 #d5a75b;z-index:4}
+.art{height:39mm;min-height:39mm;max-height:39mm;margin:2.5mm 1mm 3mm;border:1.4mm solid #fff3d7;border-radius:3mm;outline:1px solid #e4ad55;background:linear-gradient(135deg,#fff7e6,#f7e5c7);box-shadow:0 1mm 0 #cda65f;z-index:4}
+.art img{object-fit:cover}.art .emoji{font-size:35pt}
+.info{gap:2mm;z-index:4}
+.info-row{background:#fff2d5eF;border:1px solid #e5b86e;border-radius:2.5mm;padding:2mm 2.5mm;border-left:0;box-shadow:0 .6mm 0 #d8ad69}
+.info-label{font-size:7pt;color:#8b6032;margin-bottom:.7mm}.info-value{font-size:9pt;color:#553e35;line-height:1.3}
+.back .quest-emblem{width:12mm;height:12mm;margin:1mm auto 2mm;border:1px solid #f6d48d;background:#fff0cf;color:#9d7045;font-size:17pt;box-shadow:0 1mm 0 #806b9d}
+.back .quest-sub{display:none}
+.quest-heading{display:table;margin:0 auto 3mm;padding:2mm 5mm;background:#76577f;color:#fff5e7;border:1px solid #f2cf91;border-radius:8mm;font-size:12pt;letter-spacing:.04em;box-shadow:0 1mm 0 #5c456c;z-index:4}
+.quest-text{min-height:66mm;padding:4mm 3.5mm;background:#fff4dc;border:1.2px solid #e9bc79;border-radius:4mm;color:#60463b;font-size:10pt;line-height:1.7;box-shadow:0 1mm 0 #d4a66b;z-index:4}
+.quest-foot{bottom:4mm;color:#fff2ce;text-shadow:0 1px 2px #53628b;font-size:7pt;letter-spacing:.16em}
+.corner{z-index:5;width:6mm;height:6mm;border-color:#fff0c9}
+@media(max-width:720px){.card{padding:2.2mm}.card-top{font-size:6px;padding:1mm 2mm}.card-title{font-size:13px;padding:5px 3px}.art{height:33%;min-height:50px}.info-row{padding:5px}.quest-heading{font-size:13px;padding:5px 9px}.quest-text{font-size:11px;min-height:0;height:55%;padding:8px}}
+@media print{
+ html,body{width:210mm!important;min-height:297mm!important;margin:0!important;background:#fff!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+ @page{size:A4 portrait;margin:10mm}
+ main{width:190mm!important;max-width:none!important;margin:0!important;padding:0!important}
+ .preview{width:190mm!important;padding:0!important;margin:0!important}
+ #printArea{display:block!important;width:190mm!important}
+ .card-pair{width:144mm!important;height:120mm!important;margin:0 auto 0!important;display:flex!important;gap:4mm!important;break-inside:avoid!important;page-break-inside:avoid!important;break-after:page!important;page-break-after:always!important}
+ .card-pair:last-child{break-after:auto!important;page-break-after:auto!important}
+ .card{width:70mm!important;height:120mm!important;min-width:70mm!important;max-width:70mm!important;flex:0 0 70mm!important;overflow:hidden!important;box-sizing:border-box!important}
+ .front:after,.back:after{display:block!important}
+}
+
 </style>
 </head>
 <body>
@@ -129,7 +177,7 @@ button{font:inherit;cursor:pointer;border:0}
 <div class="preview-head no-print"><div><h2>カードのプレビュー</h2><div class="preview-note">表面・裏面／各 70 × 120 mm</div></div><button class="primary" id="printBtn">PDF・印刷</button></div>
 <div id="printArea"></div>
 <div class="saved no-print"><h2>保存したカード</h2><div id="savedList"></div></div>
-<p class="small no-print">A4縦向きに、縦型カードの表面・裏面を横並びで配置します。印刷倍率は「100%」または「実際のサイズ」を選んでください。</p>
+<p class="small no-print">A4 1ページに表面・裏面の2枚を横並びで配置します（各70×120mm）。印刷倍率は「100%」または「実際のサイズ」を選んでください。</p>
 </section>
 </main>
 <script>
@@ -140,7 +188,7 @@ function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 function readForm(){return{id:editingId||String(Date.now()),title:$('title').value.trim(),icon:selectedIcon,art:artData,cost:$('cost').value.trim(),needs:$('needs').value.trim(),firstStep:$('firstStep').value.trim()}}
 function form(c){fields.forEach(k=>$(k).value=c?.[k]||'');selectedIcon=c?.icon||'🗺️';artData=c?.art||'';document.querySelectorAll('.icon').forEach(b=>b.classList.toggle('active',b.dataset.icon===selectedIcon));showThumb();$('artUpload').value='';$('cropper').style.display='none'}
 function showThumb(){const im=$('uploadThumb');im.src=artData||'';im.style.display=artData?'block':'none'}
-function renderPreview(c){const art=c.art?`<img src="${c.art}" alt="">`:`<span class="emoji">${esc(c.icon||'🗺️')}</span>`;return `<div class="card-pair"><article class="card front"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="card-top">✦ ADVENTURER'S GUILD ✦</div><div class="card-title">${esc(c.title||'クエストのタイトル')}</div><div class="art">${art}</div><div class="info"><div class="info-row"><span class="info-label">COIN　費用</span><span class="info-value">${esc(c.cost||'これから決めよう！')}</span></div><div class="info-row"><span class="info-label">ITEM　必要なもの</span><span class="info-value">${esc(c.needs||'持ちものを書こう')}</span></div></div></article><article class="card back"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="card-top">✦ QUEST LOG ✦</div><div class="quest-emblem">✧</div><div class="quest-sub">YOUR FIRST STEP</div><div class="quest-heading">計画の一歩目</div><div class="quest-text">${esc(c.firstStep||'最初の一歩を考えてみよう！')}</div><div class="quest-foot">✦　MISSION START　✦</div></article></div>`}
+function renderPreview(c){const art=c.art?`<img src="${c.art}" alt="">`:`<span class="emoji">${esc(c.icon||'🗺️')}</span>`;return `<div class="card-pair"><article class="card front"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="card-top">♛　MY QUEST　♛</div><div class="card-title">${esc(c.title||'クエストのタイトル')}</div><div class="art">${art}</div><div class="info"><div class="info-row"><span class="info-label">🪙　費用</span><span class="info-value">${esc(c.cost||'これから決めよう！')}</span></div><div class="info-row"><span class="info-label">🎒　必要なもの</span><span class="info-value">${esc(c.needs||'持ちものを書こう')}</span></div></div></article><article class="card back"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><div class="card-top">✦　NEXT MISSION　✦</div><div class="quest-emblem">✧</div><div class="quest-heading">計画の一歩目</div><div class="quest-text">${esc(c.firstStep||'最初の一歩を考えてみよう！')}</div><div class="quest-foot">✦　YOUR ADVENTURE BEGINS　✦</div></article></div>`}
 function previewDraft(){$('printArea').innerHTML=renderPreview(readForm())}
 function persist(){try{localStorage.setItem('tinyPlanCards',JSON.stringify(cards))}catch(e){alert('保存容量がいっぱいです。画像サイズを小さくするか、不要なカードを削除してください。')}}
 function render(){ $('savedList').innerHTML=cards.length?cards.map(c=>`<div class="saved-row"><span>${esc(c.title||'タイトル未入力')}</span><div><button class="secondary" data-edit="${esc(c.id)}">編集</button> <button class="danger" data-delete="${esc(c.id)}">削除</button></div></div>`).join(''):'<div class="empty">保存したカードはまだありません。</div>'}
